@@ -1,0 +1,52 @@
+version: '3'
+services:
+
+  postgres:
+    image: "postgres:15-alpine3.17"
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=$DATABASE_USER
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  api:
+    build: ./api
+    depends_on:
+      - postgres
+    container_name: api
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    environment:
+      - DATABASE_NAME=$DATABASE_NAME
+      - DATABASE_USER=$DATABASE_USER
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - DATABASE_HOST=$DATABASE_HOST
+      - DATABASE_PORT=$DATABASE_PORT
+    ports:
+      - 5000:5000
+    links:
+      - postgres
+
+  web_client:
+    build: ./web_client
+    depends_on: 
+      - api
+    container_name: web-client
+    ports:
+      - 8080:80
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
