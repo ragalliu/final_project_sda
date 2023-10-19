@@ -31,7 +31,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly-EK
 }
 
 resource "aws_eks_cluster" "ra-eks" {
- name = "ra-cluster"
+ name = "${var.APP_NAME}-cluster"
  role_arn = aws_iam_role.eks-iam-role.arn
  version = var.kubernetes_version
 
@@ -45,7 +45,7 @@ resource "aws_eks_cluster" "ra-eks" {
 }
 
 resource "aws_iam_role" "workernodes" {
-  name = "ra-eks-node-group"
+  name = "${var.APP_NAME}-eks-node-group"
  
   assume_role_policy = jsonencode({
    Statement = [{
@@ -81,7 +81,7 @@ resource "aws_iam_role" "workernodes" {
 
  resource "aws_eks_node_group" "worker-node-group" {
   cluster_name  = aws_eks_cluster.ra-eks.name
-  node_group_name = "ra-eks-workernodes"
+  node_group_name = "${APP_NAME}-eks-workernodes"
   node_role_arn  = aws_iam_role.workernodes.arn
   subnet_ids   = var.cluster_subnet_ids
   instance_types = ["t3.micro"]
@@ -98,6 +98,13 @@ resource "aws_iam_role" "workernodes" {
    aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
  }
+resource "aws_ecr_repository" "repo" {
+  name                 = "${APP_NAME}-repo"
+  image_tag_mutability = "MUTABLE"
 
-  
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
  

@@ -1,12 +1,14 @@
 module aws_network {
   source = "./modules/network"
   create_db_sg = true
+  APP_NAME = var.APP_NAME
 }
 
 module aws_cluster {
   source = "./modules/cluster"
   cluster_subnet_ids = module.aws_network.public_subnet_id
   depends_on = [ module.aws_network ]
+  APP_NAME = var.APP_NAME
 }
 
 

@@ -24,3 +24,8 @@ variable "cluster_subnet_ids" {
   
 }
 
+variable "APP_NAME" {
+    type = string
+  
+}
+

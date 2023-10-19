@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "ra_static_site" {
-  bucket = "ra-static-site-bucket"
+  bucket = "${APP_NAME}-static-site-bucket"
 
 }
 

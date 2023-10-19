@@ -35,3 +35,7 @@ variable "create_db_sg" {
     default = false
   
 }
+
+variable "APP_NAME" {
+    type = string
+}
