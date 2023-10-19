@@ -145,3 +145,4 @@ data
 *.cmd
 
 keypair
+infrastucture/.terraform.lock.hcl

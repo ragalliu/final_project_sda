@@ -81,7 +81,7 @@ resource "aws_iam_role" "workernodes" {
 
  resource "aws_eks_node_group" "worker-node-group" {
   cluster_name  = aws_eks_cluster.ra-eks.name
-  node_group_name = "${APP_NAME}-eks-workernodes"
+  node_group_name = "${var.APP_NAME}-eks-workernodes"
   node_role_arn  = aws_iam_role.workernodes.arn
   subnet_ids   = var.cluster_subnet_ids
   instance_types = ["t3.micro"]
@@ -99,7 +99,7 @@ resource "aws_iam_role" "workernodes" {
   ]
  }
 resource "aws_ecr_repository" "repo" {
-  name                 = "${APP_NAME}-repo"
+  name                 = "${var.APP_NAME}-repo"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

@@ -6,7 +6,7 @@ resource "aws_vpc" "test" {
 
 
   tags = {
-    Name = "test-ra"
+    Name = "${var.APP_NAME}-ra"
   }
 }
 
@@ -31,7 +31,7 @@ resource "aws_internet_gateway" "test" {
   vpc_id = aws_vpc.test.id
 
   tags = {
-    Name = "igw"
+    Name = "${var.APP_NAME}-igw"
   }
 }
 resource "aws_route_table" "test" {
@@ -43,7 +43,7 @@ resource "aws_route_table" "test" {
   }
 
   tags = {
-    Name = "test-rt"
+    Name = "${var.APP_NAME}-rt"
   }
 
 }
