@@ -26,14 +26,14 @@ pipeline {
                     dir('infrastucture') {
                         sh 'terraform init'
                         sh 'terraform apply --auto-approve'
-                        sh "dbport = \$(terraform output DB_PORT)"
-                        sh "dburl = \$(terraform output DB_HOST)"
-                        sh "dbuser = \$(terraform output DB_USERNAME)"
-                        sh "dbpass = \$(terraform output DB_PASSWORD)"
-                        sh "repourl = \$(terraform output ECR_REPOSITORY_URL)"
-                        sh "bucketname = \$(terraform output WEB_CLIENT_BUCKET_NAME)"
-                        sh "clustername = \$(terraform output EKS_CLUSTER_NAME)"
-                        sh "dbname = \$(terraform output DB_NAME)"
+                        dbport = sh(script : $(terraform output DB_PORT),returnStdOut : True).trim()
+                        sh "dburl = $(terraform output DB_HOST)"
+                        sh "dbuser = $(terraform output DB_USERNAME)"
+                        sh "dbpass = $(terraform output DB_PASSWORD)"
+                        sh "repourl = $(terraform output ECR_REPOSITORY_URL)"
+                        sh "bucketname = $(terraform output WEB_CLIENT_BUCKET_NAME)"
+                        sh "clustername = $(terraform output EKS_CLUSTER_NAME)"
+                        sh "dbname = $(terraform output DB_NAME)"
 
 
                     }
