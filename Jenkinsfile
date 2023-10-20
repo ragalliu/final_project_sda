@@ -26,14 +26,14 @@ pipeline {
                     dir('infrastucture') {
                         sh 'terraform init'
                         sh 'terraform apply --auto-approve'
-                        dbport = sh(script : '$(terraform output DB_PORT)', returnStdout : true).trim()
-                        dburl  = sh(script : '$(terraform output DB_HOST)', returnStdout : true).trim()
-                        dbuser = sh(script : '$(terraform output DB_USERNAME)', returnStdout : true).trim()
-                        dbpass = sh(script : '$(terraform output DB_PASSWORD)', returnStdout : true).trim()
-                        repourl = sh(script : '$(terraform output ECR_REPOSITORY_URL)', returnStdout : true).trim()
-                        bucketname = sh(script : '$(terraform output WEB_CLIENT_BUCKET_NAME)', returnStdout : true).trim()
-                        clustername = sh(script : '$(terraform output EKS_CLUSTER_NAME)', returnStdout : true).trim()
-                        dbname = sh(script: '$(terraform output DB_NAME)', returnStdout : true).trim()
+                        dbport = sh(script : 'terraform output DB_PORT', returnStdout : true).trim()
+                        dburl  = sh(script : 'terraform output DB_HOST', returnStdout : true).trim()
+                        dbuser = sh(script : 'terraform output DB_USERNAME', returnStdout : true).trim()
+                        dbpass = sh(script : 'terraform output DB_PASSWORD', returnStdout : true).trim()
+                        repourl = sh(script : 'terraform output ECR_REPOSITORY_URL', returnStdout : true).trim()
+                        bucketname = sh(script : 'terraform output WEB_CLIENT_BUCKET_NAME', returnStdout : true).trim()
+                        clustername = sh(script : 'terraform output EKS_CLUSTER_NAME', returnStdout : true).trim()
+                        dbname = sh(script: 'terraform output DB_NAME', returnStdout : true).trim()
 
 
                     }
