@@ -2,7 +2,6 @@
 def dbport = ""
 def dburl = ""
 def repourl = ""
-def dburl = ""
 def dbuser = ""
 def dbpass = ""
 def bucketname = ""
