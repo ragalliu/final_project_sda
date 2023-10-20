@@ -26,7 +26,7 @@ pipeline {
                     dir('infrastucture') {
                         sh 'terraform init'
                         sh 'terraform apply --auto-approve'
-                        dbport = sh(script : $(terraform output DB_PORT),returnStdOut : True).trim()
+                        dbport = sh(script : '$(terraform output DB_PORT)', returnStdOut : True).trim()
                         sh "dburl = $(terraform output DB_HOST)"
                         sh "dbuser = $(terraform output DB_USERNAME)"
                         sh "dbpass = $(terraform output DB_PASSWORD)"
