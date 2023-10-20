@@ -14,18 +14,18 @@ def getCommitSha() {
 }
 pipeline {
     agent any
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = "eu-north-1"
-    }
+    // environment {
+    //     AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+    //     AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    //     AWS_DEFAULT_REGION = "eu-north-1"
+    // }
     stages {
         stage("Create Infrastucture") {
             steps {
                 script {
                     dir('infrastucture') {
                         sh 'terraform init'
-                        sh 'terraform apply -auto-approve'
+                        sh 'terraform apply --auto-approve'
                         sh 'dbport = $(terraform output DB_PORT)'
                         sh 'dburl = $(terraform output DB_HOST)'
                         sh 'dbuser = $(terraform output DB_USERNAME)'
