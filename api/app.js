@@ -21,17 +21,17 @@ const pgClient = new Pool({
   password: config.dbPassword,
   database: config.dbName,
   // ssl: {
-  //   rejectUnauthorized: false,
-  //   require: false,
-  // },
+  //  rejectUnauthorized: false,
+  //  require: true,
+  //},
 });
 
 pgClient.on('error', (e) => {
-  getLogger().debug(e);
+  throw e;
 });
 
 pgClient.query('CREATE TABLE IF NOT EXISTS books (title varchar(128))')
-  .catch((err) => getLogger().debug(err));
+  .catch((err) => { throw err; });
 
 app.use(Cors());
 app.use(BodyParser.json({ limit: '10mb' }));
@@ -121,6 +121,7 @@ process.on('unhandledRejection', (reason) => {
 
 process.on('uncaughtException', (error) => {
   getLogger().debug(error);
+  process.exit(1);
 });
 
 module.exports = app;
