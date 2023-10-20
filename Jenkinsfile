@@ -23,7 +23,7 @@ pipeline {
         stage("Create Infrastucture") {
             steps {
                 script {
-                    dir('infrastructure') {
+                    dir('infrastucture') {
                         sh 'terraform init'
                         sh 'terraform apply -auto-approve'
                         sh 'dbport = $(terraform output DB_PORT)'
