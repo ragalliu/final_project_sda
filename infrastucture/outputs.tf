@@ -10,8 +10,47 @@
   
 # }
 
-output "rds-db-endpoint" {
-    value = aws_db_instance.ra-db.endpoint
+output "DB_HOST" {
+    value = module.aws_db_database.dburl
     description = "DB instance endpoint"
+  
+}
+
+output "DB_PORT" {
+  value = module.aws_db_database.dbport
+}
+
+output "DB_USERNAME" {
+  value = var.DB_USERNAME
+}
+
+output "DB_PASSWORD" {
+  value = var.DB_PASSWORD
+}
+
+
+output "WEB_CLIENT_BUCKET_NAME" {
+  value = module.aws_website.bucket-name
+}
+
+output "WEB_CLIENT_URL" {
+  value = module.aws_website.site-url
+}
+
+output "ECR_REPOSITORY_NAME" {
+  value = module.aws_cluster.ecr_repo_name
+}
+
+output "ECR_REPOSITORY_URL" {
+  value = module.aws_cluster.ecr_repo_url
+}
+
+output "EKS_CLUSTER_NAME" {
+    value = module.aws_cluster.cluster_name
+  
+}
+  
+output "DB_NAME" {
+    value = module.aws_db_database.dbname
   
 }

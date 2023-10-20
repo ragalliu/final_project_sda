@@ -11,18 +11,19 @@ module aws_cluster {
   APP_NAME = var.APP_NAME
 }
 
-
-
-resource "aws_db_instance" "ra-db" {
-  identifier             = "ra-db-instance"
-  db_subnet_group_name = module.aws_network.dbsng
-  instance_class         = "db.t3.micro"
-  allocated_storage      = 20
-  engine                 = "postgres"
-  engine_version         = "15"
-  skip_final_snapshot    = true
-  publicly_accessible    = true
-  vpc_security_group_ids = [module.aws_network.db-sg-id]
-  username               = "postgres"
-  password               = "test1234"
+module "aws_website" {
+  source = "./modules/website"
+  APP_NAME = var.APP_NAME
+  
 }
+
+module "aws_db_database" {
+  source = "./modules/database"
+  APP_NAME = var.APP_NAME
+  vpc-sg-ids = [module.aws_network.db-sg-id]
+  db-subnet-db_subnet_group_name = module.aws_network.dbsng
+  db_user = var.DB_USERNAME
+  db_password = var.DB_PASSWORD
+  
+}
+

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "ra_static_site" {
-  bucket = "${APP_NAME}-static-site-bucket"
+  bucket = "${var.APP_NAME}-static-site-bucket"
 
 }
 
@@ -29,6 +29,8 @@ policy = <<POLICY
   ]
 }
 POLICY
+depends_on = [ aws_s3_bucket.ra_static_site , aws_s3_bucket_public_access_block.access_block]
+
 } 
 
 resource "aws_s3_bucket_website_configuration" "ra" {

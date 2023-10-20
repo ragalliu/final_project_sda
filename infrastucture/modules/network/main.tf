@@ -6,7 +6,7 @@ resource "aws_vpc" "test" {
 
 
   tags = {
-    Name = "${var.APP_NAME}-ra"
+    Name = "${var.APP_NAME}-vpc"
   }
 }
 
@@ -17,12 +17,20 @@ resource "aws_subnet" "public_subnet" {
   cidr_block = var.public_subnets_cidr_blocks[count.index]
   map_public_ip_on_launch = true
 
+  tags = {
+    Name = "${var.APP_NAME}-public-subnet-${count.index}"
+  }
+
 }
 
 resource "aws_subnet" "private_subnets" {
        count = length(var.private_subnets_cidr_blocks)
   vpc_id     = aws_vpc.test.id
   cidr_block = var.private_subnets_cidr_blocks[count.index]
+
+  tags = {
+    Name = "${var.APP_NAME}-private-subnet-${count.index}"
+  }
 
   
 }
@@ -80,7 +88,7 @@ resource "aws_security_group" "test" {
 }
 resource "aws_security_group" "test_1" {
   count =var.create_db_sg  ? 1 : 0
-  name = "terraform-ra-test_1"
+  name = "${var.APP_NAME}-db-sg"
   vpc_id = aws_vpc.test.id
   ingress {
     from_port   = var.rds_port
