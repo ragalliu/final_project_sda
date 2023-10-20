@@ -43,7 +43,7 @@ pipeline {
         stage("Build & Push to ECR") {
             environment {
                 IMAGE_TAG=getCommitSha()
-                ECR_REPOSITORY_URL=repourl
+                ECR_REPOSITORY_URL="${repourl}"
             }
             steps  {
                 script {
@@ -57,12 +57,12 @@ pipeline {
         }
         stage("Deploy to EKS") {
             environment{
-                IMAGE_URL = imageurl
-                DATABASE_HOST = dburl
-                DATABASE_PORT = dbport
-                DATABASE_USER = dbuser
-                DATABASE_PASSWORD = dbpass
-                DATABASE_NAME = dbname
+                IMAGE_URL = "${imageurl}"
+                DATABASE_HOST = "${dburl}"
+                DATABASE_PORT = "${dbport}"
+                DATABASE_USER = "${dbuser}"
+                DATABASE_PASSWORD = "${dbpass}"
+                DATABASE_NAME = "${dbname}"
 
 
             }
@@ -78,7 +78,7 @@ pipeline {
             }
         }
         stage('Build Web Client') {
-            enviroment{
+            environment{
                 REACT_APP_SERVER_URL = "http://${apiurl}"
 
             }
