@@ -43,7 +43,7 @@ pipeline {
         stage("Build & Push to ECR") {
             environment {
                 IMAGE_TAG=getCommitSha() 
-                ECR_REPOSITORY_URL=${repourl}
+                ECR_REPOSITORY_URL='${repourl}'
             }
             steps  {
                 script {
