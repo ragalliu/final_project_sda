@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api1
-          image: ${API_IMAGE_URL}
+          image: ${IMAGE_URL}
           ports:
             - containerPort: 5000
           env:
