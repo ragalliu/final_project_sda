@@ -94,7 +94,7 @@ pipeline {
                     dir('web_client'){
                         sh 'npm install'
                         sh 'npm run build'
-                        sh 'aws s3 sync ./build/ s3://$bucketname --delete'
+                        sh "aws s3 sync ./build/ s3://${bucketname} --delete"
                     }
 
                 }
