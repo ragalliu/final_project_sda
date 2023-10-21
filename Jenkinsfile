@@ -71,6 +71,9 @@ pipeline {
             steps {
                 script {
                     dir('kubernetes') {
+                        echo env.IMAGE_URL
+                        echo env.DATABASE_HOST
+                        echo env.DATABASE_PORT
                         sh "aws eks update-kubeconfig --name ${clustername}"
                         sh 'envsubst < deployment.yaml | kubectl apply -f -'
                         sh 'kubectl apply -f service.yaml'
