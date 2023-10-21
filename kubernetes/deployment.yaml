@@ -12,6 +12,7 @@ spec:
       labels:
         app: api
     spec:
+      restartPolicy: Always
       containers:
         - name: api1
           image: ${IMAGE_URL}
