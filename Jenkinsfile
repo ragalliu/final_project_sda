@@ -49,7 +49,7 @@ pipeline {
                 script {
                     dir('api') {
                     sh 'aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 129392916120.dkr.ecr.eu-north-1.amazonaws.com'
-                    sh "docker build -t ${repourl}:${IMAGE_TAG }  ./ "
+                    sh "docker build -t myimg . "
                     imageurl = "${repourl}:${IMAGE_TAG}"
                     sh 'docker push $imageurl'
                     }
