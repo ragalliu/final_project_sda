@@ -20,10 +20,10 @@ const pgClient = new Pool({
   user: config.dbUser,
   password: config.dbPassword,
   database: config.dbName,
-  // ssl: {
-  //  rejectUnauthorized: false,
-  //  require: true,
-  //},
+  ssl: {
+   rejectUnauthorized: false,
+   require: true,
+  },
 });
 
 pgClient.on('error', (e) => {
