@@ -24,8 +24,8 @@ pipeline {
             steps {
                 script {
                     dir('infrastucture') {
-                        sh 'terraform init'
-                        sh 'terraform apply --auto-approve'
+                        // sh 'terraform init'
+                        sh 'terraform destroy --auto-approve'
                         dbport = sh(script : 'terraform output DB_PORT', returnStdout : true).trim()
                         dburl  = sh(script : 'terraform output DB_HOST', returnStdout : true).trim()
                         dbuser = sh(script : 'terraform output DB_USERNAME', returnStdout : true).trim()
