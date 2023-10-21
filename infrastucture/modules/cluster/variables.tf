@@ -16,7 +16,7 @@ variable "preferd_nodes_number" {
 }
 variable "kubernetes_version" {
     type = string
-    default = "1.28"
+    default = "1.27"
   
 }
 variable "cluster_subnet_ids" {
