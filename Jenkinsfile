@@ -86,6 +86,7 @@ pipeline {
                         sh 'envsubst < deployment.yaml > deploysub.yaml'
                         sh 'kubectl apply -f deploysub.yaml'
                         sh 'kubectl apply -f service.yaml'
+                        sh "curl https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/quickstart/cwagent-fluentd-quickstart.yaml | sed "s/${clustername}/cluster-name/;s/${AWS_DEFAULT_REGION}/cluster-region/" | kubectl apply -f -"
                         apiurl = sh(script: 'kubectl get service api -o jsonpath={.status.loadBalancer.ingress[0].hostname}' , returnStdout : true ).trim()
                         
                     }
