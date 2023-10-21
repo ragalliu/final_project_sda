@@ -49,15 +49,15 @@ pipeline {
                 script {
                     dir('api') {
                     sh 'aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 129392916120.dkr.ecr.eu-north-1.amazonaws.com'
-                    bport = sh(script : 'terraform output DB_PORT', returnStdout : true).trim()
-                    dburl  = sh(script : 'terraform output DB_HOST', returnStdout : true).trim()
-                    dbuser = sh(script : 'terraform output DB_USERNAME', returnStdout : true).trim()
-                    dbpass = sh(script : 'terraform output DB_PASSWORD', returnStdout : true).trim()
-                    repourl = sh(script : 'terraform output ECR_REPOSITORY_URL', returnStdout : true).trim()
-                    bucketname = sh(script : 'terraform output WEB_CLIENT_BUCKET_NAME', returnStdout : true).trim()
-                    clustername = sh(script : 'terraform output EKS_CLUSTER_NAME', returnStdout : true).trim()
-                    dbname = sh(script: 'terraform output DB_NAME', returnStdout : true).trim()
-                    sh "docker build -t myimg . "
+                    // bport = sh(script : 'terraform output DB_PORT', returnStdout : true).trim()
+                    // dburl  = sh(script : 'terraform output DB_HOST', returnStdout : true).trim()
+                    // dbuser = sh(script : 'terraform output DB_USERNAME', returnStdout : true).trim()
+                    // dbpass = sh(script : 'terraform output DB_PASSWORD', returnStdout : true).trim()
+                    // repourl = sh(script : 'terraform output ECR_REPOSITORY_URL', returnStdout : true).trim()
+                    // bucketname = sh(script : 'terraform output WEB_CLIENT_BUCKET_NAME', returnStdout : true).trim()
+                    // clustername = sh(script : 'terraform output EKS_CLUSTER_NAME', returnStdout : true).trim()
+                    // dbname = sh(script: 'terraform output DB_NAME', returnStdout : true).trim()
+                    sh 'docker build -t myimg . '
                     sh "docker tag myimg ${repourl}:${IMAGE_TAG}"
                     imageurl = sh(script : "echo ${repourl}:${IMAGE_TAG}",returnStdout: true)
                     sh "docker push ${repourl}:${IMAGE_TAG}"
