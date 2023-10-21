@@ -76,7 +76,7 @@ pipeline {
                         echo env.DATABASE_PORT
                         sh "aws eks update-kubeconfig --name ${clustername}"
                         sh 'envsubst < deployment.yaml > deploysub.yaml'
-                        sh 'kubectl apply -f deploysub'
+                        sh 'kubectl apply -f deploysub.yaml'
                         sh 'kubectl apply -f service.yaml'
                         apiurl = sh(script: 'kubectl get service api -o jsonpath={.status.loadBalancer.ingress[0].hostname}' , returStdout : true ).trim()
                         
