@@ -29,10 +29,4 @@ spec:
             - name: DATABASE_NAME
               value: ${DATABASE_NAME}
           imagePullPolicy: Always
-          resources:
-            limits:
-              memory: 786Mi
-              cpu: "1"
-            requests:
-              memory: 512Mi
-              cpu: "0.5"
+         

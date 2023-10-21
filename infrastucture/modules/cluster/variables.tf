@@ -6,12 +6,12 @@ variable "min_nodes_number" {
 
 variable "max_nodes_number" {
     type = number
-    default = 1
+    default = 3
 }
 
 variable "preferd_nodes_number" {
     type = number
-    default = 1
+    default = 2
   
 }
 variable "kubernetes_version" {
