@@ -24,6 +24,7 @@ module "aws_db_database" {
   db-subnet-db_subnet_group_name = module.aws_network.dbsng
   db_user = var.DB_USERNAME
   db_password = var.DB_PASSWORD
+  database_name = var.DB_NAME
   
 }
 

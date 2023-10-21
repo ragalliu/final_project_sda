@@ -34,3 +34,7 @@ variable "APP_NAME" {
     type = string
   
 }
+variable "database_name" {
+    type = string
+  
+}

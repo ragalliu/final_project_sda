@@ -1,6 +1,7 @@
 resource "aws_db_instance" "ra-db" {
   identifier             = "${var.APP_NAME}-db-instance"
   db_subnet_group_name = var.db-subnet-db_subnet_group_name
+  db_name                = var.database_name
   instance_class         = "db.t3.micro"
   allocated_storage      = 20
   engine                 = var.engine_type
