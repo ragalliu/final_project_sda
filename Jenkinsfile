@@ -80,10 +80,10 @@ pipeline {
             }
         }
         stage('Build Web Client') {
-            environment{
-                // REACT_APP_SERVER_URL = "http://${apiurl}"
+            // environment{
+            //     // REACT_APP_SERVER_URL = "http://${apiurl}"
 
-            }
+            // }
             steps{
                 script{
                     dir('web_client'){
