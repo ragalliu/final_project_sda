@@ -72,7 +72,7 @@ pipeline {
                     dir('kubernetes') {
                         sh 'aws eks update-kubeconfig --name $clustername'
                         sh 'envsubst < api.yaml | kubectl apply -f'
-                        sh 'apiurl = $(kubectl get service api -o jsonpath={.status.loadBalancer.ingress[0].hostname})'
+                        apiurl = sh(script: 'kubectl get service api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')' , retirStdout : true ).trim()
                         
                     }
                 }
