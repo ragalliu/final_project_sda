@@ -18,6 +18,7 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = "eu-north-1"
+        ACCOUNT_ID = credentials('ACCOUNT_ID')
     }
     stages {
         stage("Create Infrastucture") {
@@ -48,7 +49,7 @@ pipeline {
             steps  {
                 script {
                     dir('api') {
-                    sh 'aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 129392916120.dkr.ecr.eu-north-1.amazonaws.com'
+                    sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
                     sh 'docker build -t myimg . '
                     sh "docker tag myimg ${repourl}:${IMAGE_TAG}"
                     imageurl = sh(script : "echo ${repourl}:${IMAGE_TAG}",returnStdout: true)
