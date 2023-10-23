@@ -108,7 +108,7 @@ pipeline {
             }
             steps{
                 dir('infrastucture'){
-                    sh "aws s3 rm s3://${bucketname}"
+                    sh "aws s3 rm s3://${bucketname} --recursive"
                     sh 'terraform destroy --auto-approve'
                 }
             }
