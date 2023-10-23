@@ -101,5 +101,18 @@ pipeline {
                 }
             }
         }
+        stage('Destroy infrastructure') {
+            input {
+                message "Destroy Infrastructure?"
+                ok "Yes"
+            }
+            steps{
+                dir('infrastucture'){
+                    sh "aws s3 rm s3://${bucketname}"
+                    sh 'terraform destroy --auto-approve'
+                }
+            }
+
+        }
     }
 }
